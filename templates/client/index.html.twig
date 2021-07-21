@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Titre page1</h1>
+
+    {% for cli in clients %}
+        <div>
+            {{ cli.nom }}
+        </div>
+    {% endfor %}
+
+{% endblock %}
+
+{% block javascripts %}
+    
+{% endblock %}
