@@ -1,0 +1,10 @@
+php bin/console doctrine:database:create
+
+php bin/console make:controller Client
+php bin/console make:controller Produit
+
+php bin/console make:entity Client
+
+php bin/console doctrine:schema:update --dump-sql
+php bin/console doctrine:schema:update --force
+
