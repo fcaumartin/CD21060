@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Titre page2 - new</h1>
+
+    {{ form_start(formClient) }}
+    {{ form_errors(formClient.nom) }}
+    {{ form_errors(formClient.prenom) }}
+
+    {{ form_widget(formClient.nom) }}
+
+
+    {{ form_widget(formClient.prenom) }}
+
+
+
+    {{ form_end(formClient) }}
+
+{% endblock %}
+
