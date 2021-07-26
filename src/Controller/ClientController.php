@@ -7,6 +7,7 @@ use App\Form\ClientFormType;
 use App\Repository\ClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,7 +44,7 @@ class ClientController extends AbstractController
 
             $photo = $form->get("photo")->getData();
             $photo_name = uniqid("client_", true) . ".png";
-            $photo->move("photos", $photo_name);
+            $photo->move("../photos", $photo_name);
             $cli->setPhoto($photo_name);
             $em->flush();
 
@@ -80,5 +81,16 @@ class ClientController extends AbstractController
         return $this->render('client/new.html.twig', [
             'controller_name' => 'ClientController',
         ]);
+    }
+
+    /**
+     * @Route("/pic/{client}", name="client_pic")
+     */
+    public function client_pic(Client $client): Response
+    {
+
+        //dd($client);
+
+        return new BinaryFileResponse("../photos/" . $client->getPhoto());
     }
 }
