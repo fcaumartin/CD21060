@@ -39,6 +39,12 @@ class ClientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             $em->persist($cli);
+            //$em->flush();
+
+            $photo = $form->get("photo")->getData();
+            $photo_name = uniqid("client_", true) . ".png";
+            $photo->move("photos", $photo_name);
+            $cli->setPhoto($photo_name);
             $em->flush();
 
             return $this->redirect("/client");
