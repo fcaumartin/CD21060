@@ -12,13 +12,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/client")
+ */
 class ClientController extends AbstractController
 {
     /**
-     * @Route("/client", name="client")
+     * @Route("/", name="client")
      */
     public function index(ClientRepository $repo): Response
     {
+        // $this->denyAccessUnlessGranted('ROLE_VENTE');
+
         $clients = $repo->findAll();
 
         return $this->render('client/index.html.twig', [
@@ -31,6 +36,8 @@ class ClientController extends AbstractController
      */
     public function client_new2(EntityManagerInterface $em, Request $request): Response
     {
+        // $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $cli = new Client();
 
         $form = $this->createForm(ClientFormType::class, $cli);
